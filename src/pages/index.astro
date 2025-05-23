@@ -1,0 +1,157 @@
+---
+import { Icon } from 'astro-icon';
+
+const links = [
+  { href: 'https://www.instagram.com/empressmatcha', text: 'Instagram',       icon: 'mdi:instagram'     },
+  { href: 'https://empressmatcha.com',                text: 'Website',         icon: 'mdi:web'           },
+  { href: 'https://empressmatcha.com/shop',           text: 'Buy Now',         icon: 'mdi:cart'          },
+  { href: 'https://empressmatcha.com/events',         text: 'Upcoming Events', icon: 'mdi:calendar'      },
+  { href: 'mailto:hello@empressmatcha.com',           text: 'Contact Us',      icon: 'mdi:email-outline'},
+];
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Empress Matcha — Royalty in every cup. Join our community for premium ceremonial blends, events, and more." />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Empress Matcha</title>
+    <link rel="icon" href="/assets/emlogo.webp" type="image/webp" />
+
+    <style>
+      :root {
+        /* Ceremonial-grade matcha green */
+        --green:    #7BA23F;
+        --light:    #FAFDF5;
+        --dark:     #34532D;
+        --white80:  rgba(255,255,255,0.85);
+
+        --spacing:  1rem;
+        --radius:   0.5rem;
+        --max-width:420px;
+
+        --fade-dur: 0.6s;
+        --grad-dur: 10s;
+      }
+
+      /* Reset */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+      html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, sans-serif }
+
+      body {
+        display: flex; align-items: center; justify-content: center;
+        background: radial-gradient(circle at top, var(--light), #E6F4D9);
+        color: var(--dark); line-height: 1.6;
+      }
+
+      /* Preloader */
+      @keyframes gradientBG {
+        0%,100% { background-position: 0% 50% }
+        50%     { background-position: 100% 50% }
+      }
+      #preloader {
+        position: fixed; inset: 0;
+        background: linear-gradient(135deg, var(--light), #D6ECD2, var(--light), #F0F9ED);
+        background-size: 300% 300%;
+        animation: gradientBG var(--grad-dur) ease infinite;
+        display: flex; align-items: center; justify-content: center;
+        z-index: 999; transition: opacity .5s;
+      }
+      #preloader.hidden { opacity: 0; pointer-events: none }
+      #preloader img { width: 6rem; height: 6rem }
+
+      /* Main card */
+      main {
+        width: 100%; max-width: var(--max-width);
+        background: var(--white80); border-radius: var(--radius);
+        padding: calc(var(--spacing) * 2);
+        box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+        text-align: center; opacity: 0; transform: translateY(1rem);
+        animation: fadeIn var(--fade-dur) ease-out forwards;
+      }
+      @keyframes fadeIn { to { opacity: 1; transform: none } }
+
+      header .logo {
+        width: 6rem; margin-bottom: var(--spacing);
+      }
+      header h1 {
+        font-size: clamp(1.75rem, 6vw, 2.25rem);
+        color: var(--green); margin-bottom: calc(var(--spacing)/2);
+        font-weight: 700;
+      }
+      header p {
+        margin-bottom: var(--spacing); font-weight: 500;
+      }
+
+      /* Links */
+      nav {
+        display: flex; flex-direction: column; gap: var(--spacing);
+        margin: calc(var(--spacing)*1.5) 0;
+      }
+      nav a {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: .85rem 1.5rem; border: 2px solid var(--green);
+        border-radius: var(--radius); background: #fff; color: var(--dark);
+        font-weight: 600; text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        transition: background .3s, transform .3s, box-shadow .3s;
+      }
+      nav a:hover {
+        background: var(--green); color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      }
+      .icon {
+        display: inline-flex; align-items: center; gap: .5rem;
+      }
+
+      /* Footer */
+      footer {
+        margin-top: calc(var(--spacing)*2);
+        font-size: .85rem; color: var(--dark);
+      }
+
+      @media (max-width: 480px) {
+        main { padding: var(--spacing) }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="preloader">
+      <img src="/assets/emlogo.webp" alt="Loading Empress Matcha logo" loading="lazy" />
+    </div>
+
+    <main>
+      <header>
+        <img src="/assets/emlogo.webp" alt="Empress Matcha Logo" class="logo" loading="lazy" />
+        <h1>Empress Matcha</h1>
+        <p><strong>Royalty in Every Cup</strong></p>
+      </header>
+
+      <nav aria-label="Empress Matcha Links">
+        {links.map((link, i) => (
+          <a key={i} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.text}>
+            <span class="icon">
+              <Icon name={link.icon} size={20} />
+              {link.text}
+            </span>
+            <Icon name="mdi:arrow-right" size={20} />
+          </a>
+        ))}
+      </nav>
+
+      <footer>Empress Matcha © {new Date().getFullYear()}</footer>
+    </main>
+
+    <script type="module">
+      window.addEventListener('load', () => {
+        const pre = document.getElementById('preloader');
+        setTimeout(() => {
+          pre.classList.add('hidden');
+          pre.addEventListener('transitionend', () => pre.remove(), { once: true });
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>
