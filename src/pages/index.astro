@@ -1,156 +1,180 @@
 ---
 import { Icon } from 'astro-icon';
 
-const links = [
-  { href: 'https://www.instagram.com/empressmatcha', text: 'Instagram',       icon: 'mdi:instagram'     },
-  { href: 'https://empressmatcha.com',                text: 'Website',         icon: 'mdi:web'           },
-  { href: 'https://empressmatcha.com/shop',           text: 'Buy Now',         icon: 'mdi:cart'          },
-  { href: 'https://empressmatcha.com/events',         text: 'Upcoming Events', icon: 'mdi:calendar'      },
-  { href: 'mailto:hello@empressmatcha.com',           text: 'Contact Us',      icon: 'mdi:email-outline'},
+let links = [
+  { href: "https://www.instagram.com/empressmatcha",    text: "Instagram",       icon: "mdi:instagram"      },
+  { href: "https://empressmatcha.com",                  text: "Website",         icon: "mdi:web"            },
+  { href: "https://empressmatcha.com/shop",             text: "Buy Now",         icon: "mdi:cart"           },
+  { href: "https://empressmatcha.com/events",           text: "Upcoming Events", icon: "mdi:calendar"       },
+  { href: "mailto:hello@empressmatcha.com",             text: "Contact Us",      icon: "mdi:email-outline"  },
 ];
 ---
-<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="description" content="Empress Matcha — Royalty in every cup. Join our community for premium ceremonial blends, events, and more." />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Empress Matcha — Royalty in every cup. Premium ceremonial matcha blends, events, and more." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
     <title>Empress Matcha</title>
-    <link rel="icon" href="/assets/emlogo.webp" type="image/webp" />
+    <link rel="icon" type="image/jpeg" href="/assets/Crown.jpeg" />
 
     <style>
-      :root {
-        /* Ceremonial-grade matcha green */
-        --green:    #7BA23F;
-        --light:    #FAFDF5;
-        --dark:     #34532D;
-        --white80:  rgba(255,255,255,0.85);
-
-        --spacing:  1rem;
-        --radius:   0.5rem;
-        --max-width:420px;
-
-        --fade-dur: 0.6s;
-        --grad-dur: 10s;
-      }
-
-      /* Reset */
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
-      html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, sans-serif }
-
-      body {
-        display: flex; align-items: center; justify-content: center;
-        background: radial-gradient(circle at top, var(--light), #E6F4D9);
-        color: var(--dark); line-height: 1.6;
-      }
-
-      /* Preloader */
+      /* ── PRELOADER GRADIENT ──────────────────────────────────────────────── */
       @keyframes gradientBG {
-        0%,100% { background-position: 0% 50% }
-        50%     { background-position: 100% 50% }
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
       }
       #preloader {
         position: fixed; inset: 0;
-        background: linear-gradient(135deg, var(--light), #D6ECD2, var(--light), #F0F9ED);
+        background: linear-gradient(135deg, #0b1f0a, #163a1e, #25512d, #0b1f0a);
         background-size: 300% 300%;
-        animation: gradientBG var(--grad-dur) ease infinite;
+        animation: gradientBG 12s ease infinite;
         display: flex; align-items: center; justify-content: center;
-        z-index: 999; transition: opacity .5s;
+        z-index: 9999; transition: opacity 0.5s ease;
       }
-      #preloader.hidden { opacity: 0; pointer-events: none }
-      #preloader img { width: 6rem; height: 6rem }
-
-      /* Main card */
-      main {
-        width: 100%; max-width: var(--max-width);
-        background: var(--white80); border-radius: var(--radius);
-        padding: calc(var(--spacing) * 2);
-        box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
-        text-align: center; opacity: 0; transform: translateY(1rem);
-        animation: fadeIn var(--fade-dur) ease-out forwards;
+      #preloader.hidden {
+        opacity: 0; pointer-events: none;
       }
-      @keyframes fadeIn { to { opacity: 1; transform: none } }
-
-      header .logo {
-        width: 6rem; margin-bottom: var(--spacing);
-      }
-      header h1 {
-        font-size: clamp(1.75rem, 6vw, 2.25rem);
-        color: var(--green); margin-bottom: calc(var(--spacing)/2);
-        font-weight: 700;
-      }
-      header p {
-        margin-bottom: var(--spacing); font-weight: 500;
+      /* preloader logo with 8px rounded corners */
+      #preloader img {
+        width: 800px;
+        height: 800px;
+        border-radius: 8px;
       }
 
-      /* Links */
-      nav {
-        display: flex; flex-direction: column; gap: var(--spacing);
-        margin: calc(var(--spacing)*1.5) 0;
+      /* ── GLOBAL RESET & DARK MATCHA BACKGROUND ───────────────────────────── */
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: radial-gradient(circle at top, #0b1f0a, #25512d);
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #e5f7e0;
+        display: flex; align-items: center; justify-content: center;
+        min-height: 100vh; padding: 1rem;
       }
-      nav a {
+
+      /* ── CARD ─────────────────────────────────────────────────────────────── */
+      .card {
+        max-width: 420px; width: 100%;
+        background: rgba(30, 60, 40, 0.4);
+        border-radius: 20px; /* keep your existing card radius */
+        padding: 2.5rem;
+        text-align: center;
+        box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+        animation: fadeIn 0.8s cubic-bezier(0.25,0.1,0.25,1) forwards;
+      }
+      @keyframes fadeIn {
+        0%   { opacity: 0; transform: translateY(30px) scale(0.98); }
+        60%  { opacity: 0.7; transform: translateY(-10px) scale(1.02); }
+        100% { opacity: 1; transform: translateY(0)     scale(1); }
+      }
+
+      .logo {
+        width: 100px; height: 100px; margin-bottom: 1rem;
+      }
+
+      h1 {
+        margin: 0.4rem 0 0.8rem;
+        font-size: 2rem; font-weight: 700;
+        color: #c2f0b1;
+      }
+      p {
+        font-size: 1rem;
+        color: #d4f5c8;
+        margin-bottom: 2rem;
+      }
+
+      /* ── BUTTONS ─────────────────────────────────────────────────────────── */
+      .button-list {
+        display: flex; flex-direction: column; gap: 1rem;
+      }
+      .button-list a {
         display: flex; align-items: center; justify-content: space-between;
-        padding: .85rem 1.5rem; border: 2px solid var(--green);
-        border-radius: var(--radius); background: #fff; color: var(--dark);
-        font-weight: 600; text-decoration: none;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        transition: background .3s, transform .3s, box-shadow .3s;
+        background: rgba(50, 90, 60, 0.3);
+        border: 1px solid #1a3d24;
+        padding: 1rem 1.2rem; border-radius: 12px;
+        color: #e5f7e0; text-decoration: none;
+        font-size: 1rem;
+        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        opacity: 0; transform: translateY(10px);
+        animation: popIn 0.6s ease-out forwards;
       }
-      nav a:hover {
-        background: var(--green); color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      .button-list a:nth-child(1) { animation-delay: 0.2s; }
+      .button-list a:nth-child(2) { animation-delay: 0.4s; }
+      .button-list a:nth-child(3) { animation-delay: 0.6s; }
+      .button-list a:nth-child(4) { animation-delay: 0.8s; }
+      .button-list a:nth-child(5) { animation-delay: 1s; }
+      @keyframes popIn { to { opacity: 1; transform: translateY(0); } }
+      .button-list a:hover {
+        background: rgba(50, 90, 60, 0.5);
+        transform: translateY(-3px);
+        box-shadow: 0 0 16px rgba(30, 70, 40, 0.7);
       }
-      .icon {
-        display: inline-flex; align-items: center; gap: .5rem;
+      .button-list a[disabled] {
+        background: rgba(255,255,255,0.05);
+        color: #555; pointer-events: none;
       }
+      .button-list a span { display: flex; align-items: center; gap: 0.6rem; }
+      .arrow-icon svg { font-size: 1.2em; transition: transform 0.2s; }
+      .button-list a:hover .arrow-icon svg { transform: translateX(6px); }
 
-      /* Footer */
-      footer {
-        margin-top: calc(var(--spacing)*2);
-        font-size: .85rem; color: var(--dark);
+      .footer {
+        margin-top: 2rem; font-size: 0.85rem; color: #d4f5c8;
       }
 
       @media (max-width: 480px) {
-        main { padding: var(--spacing) }
+        h1  { font-size: 1.8rem; }
+        p   { font-size: 0.95rem; }
+        .logo { width: 90px; height: 90px; }
+        .card { padding: 2rem 1.5rem; }
+        .button-list a { font-size: 0.95rem; padding: 0.9rem 1.1rem; }
       }
     </style>
   </head>
 
   <body>
+    <!-- Preloader -->
     <div id="preloader">
-      <img src="/assets/emlogo.webp" alt="Loading Empress Matcha logo" loading="lazy" />
+      <img src="/assets/emlogo.png" alt="Empress Matcha Logo" />
     </div>
 
-    <main>
-      <header>
-        <img src="/assets/emlogo.webp" alt="Empress Matcha Logo" class="logo" loading="lazy" />
-        <h1>Empress Matcha</h1>
-        <p><strong>Royalty in Every Cup</strong></p>
-      </header>
+    <!-- Main Card -->
+    <div class="card">
+      <img src="/assets/emlogo.png" alt="Empress Matcha Logo" class="logo" loading="lazy" />
+      <h1>Empress Matcha</h1>
+      <p>Royalty in every cup</p>
 
-      <nav aria-label="Empress Matcha Links">
-        {links.map((link, i) => (
-          <a key={i} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.text}>
-            <span class="icon">
-              <Icon name={link.icon} size={20} />
+      <div class="button-list">
+        {links.map(link => (
+          <a
+            href={link.href}
+            target="_blank"
+            disabled={link.disabled}
+            aria-label={`Open ${link.text}`}
+          >
+            <span>
+              <Icon name={link.icon} width="20px" height="20px" />
               {link.text}
             </span>
-            <Icon name="mdi:arrow-right" size={20} />
+            <span class="arrow-icon">
+              <Icon name="mdi:arrow-right" width="20px" height="20px" />
+            </span>
           </a>
         ))}
-      </nav>
+      </div>
 
-      <footer>Empress Matcha © {new Date().getFullYear()}</footer>
-    </main>
+      <div class="footer">Empress Matcha © {new Date().getFullYear()}</div>
+    </div>
 
+    <!-- Hide preloader after load -->
     <script type="module">
       window.addEventListener('load', () => {
         const pre = document.getElementById('preloader');
         setTimeout(() => {
           pre.classList.add('hidden');
           pre.addEventListener('transitionend', () => pre.remove(), { once: true });
-        }, 2000);
+        }, 3500);
       });
     </script>
   </body>
