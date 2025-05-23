@@ -5,11 +5,11 @@ let links = [
   { href: "https://www.instagram.com/empressmatcha",    text: "Instagram",       icon: "mdi:instagram"      },
   { href: "https://empressmatcha.com",                  text: "Website",         icon: "mdi:web"            },
   { href: "https://empressmatcha.com/shop",             text: "Buy Now",         icon: "mdi:cart"           },
-  { href: "https://empressmatcha.com/events",           text: "Upcoming Events", icon: "mdi:calendar"       },
-  { href: "mailto:hello@empressmatcha.com",             text: "Contact Us",      icon: "mdi:email-outline"  },
+  { href: "https://empressmatcha.com/events",           text: "Upcoming Events", icon: "mdi:calendar"       }
 ];
 ---
 
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -20,6 +20,11 @@ let links = [
     <link rel="icon" type="image/jpeg" href="/assets/Crown.jpeg" />
 
     <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
       /* ── PRELOADER GRADIENT ──────────────────────────────────────────────── */
       @keyframes gradientBG {
         0%   { background-position: 0% 50%; }
@@ -27,38 +32,44 @@ let links = [
         100% { background-position: 0% 50%; }
       }
       #preloader {
-        position: fixed; inset: 0;
+        position: fixed;
+        inset: 0;
         background: linear-gradient(135deg, #0b1f0a, #163a1e, #25512d, #0b1f0a);
         background-size: 300% 300%;
         animation: gradientBG 12s ease infinite;
-        display: flex; align-items: center; justify-content: center;
-        z-index: 9999; transition: opacity 0.5s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
       }
       #preloader.hidden {
-        opacity: 0; pointer-events: none;
+        opacity: 0;
+        pointer-events: none;
       }
-      /* preloader logo with 8px rounded corners */
+      /* preloader logo now 200×200px and centered */
       #preloader img {
-        width: 800px;
-        height: 800px;
+        width: 200px;
+        height: 200px;
         border-radius: 8px;
       }
 
-      /* ── GLOBAL RESET & DARK MATCHA BACKGROUND ───────────────────────────── */
-      html, body { margin: 0; padding: 0; }
+      /* ── GLOBAL DARK MATCHA BACKGROUND & CENTERING ───────────────────────── */
       body {
         background: radial-gradient(circle at top, #0b1f0a, #25512d);
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         color: #e5f7e0;
-        display: flex; align-items: center; justify-content: center;
-        min-height: 100vh; padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       /* ── CARD ─────────────────────────────────────────────────────────────── */
       .card {
-        max-width: 420px; width: 100%;
+        max-width: 420px;
+        width: 100%;
         background: rgba(30, 60, 40, 0.4);
-        border-radius: 20px; /* keep your existing card radius */
+        border-radius: 20px;
         padding: 2.5rem;
         text-align: center;
         box-shadow: 0 16px 48px rgba(0,0,0,0.4);
@@ -71,7 +82,9 @@ let links = [
       }
 
       .logo {
-        width: 100px; height: 100px; margin-bottom: 1rem;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1rem;
       }
 
       h1 {
@@ -87,14 +100,20 @@ let links = [
 
       /* ── BUTTONS ─────────────────────────────────────────────────────────── */
       .button-list {
-        display: flex; flex-direction: column; gap: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
       }
       .button-list a {
-        display: flex; align-items: center; justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         background: rgba(50, 90, 60, 0.3);
         border: 1px solid #1a3d24;
-        padding: 1rem 1.2rem; border-radius: 12px;
-        color: #e5f7e0; text-decoration: none;
+        padding: 1rem 1.2rem;
+        border-radius: 12px;
+        color: #e5f7e0;
+        text-decoration: none;
         font-size: 1rem;
         transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
         opacity: 0; transform: translateY(10px);
@@ -104,16 +123,11 @@ let links = [
       .button-list a:nth-child(2) { animation-delay: 0.4s; }
       .button-list a:nth-child(3) { animation-delay: 0.6s; }
       .button-list a:nth-child(4) { animation-delay: 0.8s; }
-      .button-list a:nth-child(5) { animation-delay: 1s; }
       @keyframes popIn { to { opacity: 1; transform: translateY(0); } }
       .button-list a:hover {
         background: rgba(50, 90, 60, 0.5);
         transform: translateY(-3px);
         box-shadow: 0 0 16px rgba(30, 70, 40, 0.7);
-      }
-      .button-list a[disabled] {
-        background: rgba(255,255,255,0.05);
-        color: #555; pointer-events: none;
       }
       .button-list a span { display: flex; align-items: center; gap: 0.6rem; }
       .arrow-icon svg { font-size: 1.2em; transition: transform 0.2s; }
@@ -150,7 +164,6 @@ let links = [
           <a
             href={link.href}
             target="_blank"
-            disabled={link.disabled}
             aria-label={`Open ${link.text}`}
           >
             <span>
