@@ -4,8 +4,8 @@ import { Icon } from 'astro-icon';
 const links = [
   { href: "https://www.instagram.com/empressmatcha", text: "Instagram",       icon: "mdi:instagram"   },
   { href: "https://empressmatcha.com",               text: "Website",         icon: "mdi:web"         },
-  { href: "https://empressmatcha.com/shop",          text: "Buy Now",         icon: "mdi:cart"        },
-  { href: "https://empressmatcha.com/events",        text: "Upcoming Events", icon: "mdi:calendar"   },
+  { href: "https://empressmatcha.com/shop",          text: "Buy Now",         icon: "mdi:cart-outline"},
+  { href: "https://empressmatcha.com/events",        text: "Upcoming Events", icon: "mdi:calendar-outline"},
 ];
 ---
 <!DOCTYPE html>
@@ -70,7 +70,8 @@ const links = [
         background: rgba(30, 60, 40, 0.4);
         border: 1px solid #1a3d24;
         border-radius: 20px;
-        padding: 2.4rem;
+        /* Added extra horizontal and vertical padding */
+        padding: 3rem 2.4rem;
         text-align: center;
         box-shadow: 0 16px 48px rgba(0,0,0,0.4);
         animation: fadeIn 0.8s cubic-bezier(0.25,0.1,0.25,1) forwards;
@@ -155,7 +156,7 @@ const links = [
         h1    { font-size: 1.8rem; }
         p     { font-size: 0.95rem; }
         .logo { width: 90px; height: 90px; }
-        .card { padding: 2rem 1.5rem; }
+        .card { padding: 2.5rem 1.8rem; }
         .button-list a {
           font-size: 0.95rem;
           padding: 0.9rem 1.1rem;
