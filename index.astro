@@ -2,10 +2,10 @@
 import { Icon } from 'astro-icon';
 
 const links = [
-  { href: "https://www.instagram.com/empressmatcha", text: "Instagram",    icon: "mdi:instagram"   },
-  { href: "https://empressmatcha.com",               text: "Website",      icon: "mdi:web"         },
-  { href: "https://empressmatcha.com/shop",          text: "Buy Now",      icon: "mdi:cart"        },
-  { href: "https://empressmatcha.com/events",        text: "Upcoming Events", icon: "mdi:calendar"  }
+  { href: "https://www.instagram.com/empressmatcha", text: "Instagram",       icon: "mdi:instagram"   },
+  { href: "https://empressmatcha.com",               text: "Website",         icon: "mdi:web"         },
+  { href: "https://empressmatcha.com/shop",          text: "Buy Now",         icon: "mdi:cart"        },
+  { href: "https://empressmatcha.com/events",        text: "Upcoming Events", icon: "mdi:calendar"   },
 ];
 ---
 <!DOCTYPE html>
@@ -24,9 +24,11 @@ const links = [
         padding: 0;
         height: 100%;
       }
+
+      /* ── PRELOADER ─────────────────────────────────────────────────────────── */
       @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
       }
       #preloader {
@@ -50,6 +52,8 @@ const links = [
         height: 480px;
         border-radius: 12px;
       }
+
+      /* ── GLOBAL BACKGROUND & LAYOUT ────────────────────────────────────────── */
       body {
         background: radial-gradient(circle at top, #0b1f0a, #25512d);
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -58,6 +62,8 @@ const links = [
         align-items: center;
         justify-content: center;
       }
+
+      /* ── CARD ─────────────────────────────────────────────────────────────── */
       .card {
         width: 100%;
         max-width: 420px;
@@ -70,14 +76,15 @@ const links = [
         animation: fadeIn 0.8s cubic-bezier(0.25,0.1,0.25,1) forwards;
       }
       @keyframes fadeIn {
-        0% { opacity: 0; transform: translateY(30px) scale(0.98); }
-        60% { opacity: 0.7; transform: translateY(-10px) scale(1.02); }
+        0%   { opacity: 0; transform: translateY(30px) scale(0.98); }
+        60%  { opacity: 0.7; transform: translateY(-10px) scale(1.02); }
         100% { opacity: 1; transform: translateY(0) scale(1); }
       }
+
       .logo {
         width: 140px;
         height: 100px;
-        margin-bottom: 0rem;
+        margin-bottom: 0;
       }
       h1 {
         margin: 0.4rem 0 0.8rem;
@@ -90,6 +97,8 @@ const links = [
         color: #d4f5c8;
         margin-bottom: 2rem;
       }
+
+      /* ── BUTTON LIST ──────────────────────────────────────────────────────── */
       .button-list {
         display: flex;
         flex-direction: column;
@@ -135,14 +144,16 @@ const links = [
       .button-list a:hover .arrow-icon svg {
         transform: translateX(6px);
       }
+
       .footer {
         margin-top: 2rem;
         font-size: 0.85rem;
         color: #d4f5c8;
       }
+
       @media (max-width: 480px) {
-        h1 { font-size: 1.8rem; }
-        p { font-size: 0.95rem; }
+        h1    { font-size: 1.8rem; }
+        p     { font-size: 0.95rem; }
         .logo { width: 90px; height: 90px; }
         .card { padding: 2rem 1.5rem; }
         .button-list a {
@@ -152,27 +163,42 @@ const links = [
       }
     </style>
   </head>
+
   <body>
-    <!-- Preloader -->
+    <!-- Preloader Overlay -->
     <div id="preloader">
       <img src="/assets/emlogo.png" alt="Empress Matcha Logo" />
     </div>
+
     <!-- Main Card -->
     <div class="card">
       <img src="/assets/logo.webp" alt="Empress Matcha Logo" class="logo" loading="lazy" />
       <h1>Empress Matcha</h1>
       <p>Royalty in every cup</p>
+
       <div class="button-list">
         {links.map(link => (
-          <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${link.text}`}>
-            <span><Icon name={link.icon} width="20px" height="20px" />{link.text}</span>
-            <span class="arrow-icon"><Icon name="mdi:arrow-right" width="20px" height="20px" /></span>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open ${link.text}`}
+          >
+            <span>
+              <Icon name={link.icon} width="20px" height="20px" />
+              {link.text}
+            </span>
+            <span class="arrow-icon">
+              <Icon name="mdi:arrow-right" width="20px" height="20px" />
+            </span>
           </a>
         ))}
       </div>
+
       <div class="footer">Empress Matcha © {new Date().getFullYear()}</div>
     </div>
-    <!-- Hide preloader -->
+
+    <!-- Hide preloader after load -->
     <script>
       window.addEventListener("load", () => {
         const pre = document.getElementById("preloader");
