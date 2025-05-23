@@ -22,10 +22,7 @@ let links = [
 
     <style>
       /* ── GLOBAL & SAFE-AREA ─────────────────────────────────────────────────*/
-      html {
-        height: 100%;
-        background: radial-gradient(circle at top, #0b1f0a, #25512d);
-      }
+      html { height: 100%; background: radial-gradient(circle at top, #0b1f0a, #25512d); }
       body {
         margin: 0;
         padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -49,7 +46,8 @@ let links = [
         z-index: 9999; transition: opacity 0.5s ease;
       }
       #preloader.hidden { opacity: 0; pointer-events: none; }
-      #preloader img { width: 250px; height: 250px; border-radius: 12px; }
+      /* loader logo bumped to 300x300px */
+      #preloader img { width: 460px; height: 460px; border-radius: 12px; }
 
       /* ── CARD ─────────────────────────────────────────────────────────────── */
       .card {
@@ -66,11 +64,7 @@ let links = [
       }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-      .logo {
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 1.2rem;
-      }
+      .logo { width: 120px; height: 120px; margin: 0 auto 1.2rem; }
       h1 { margin: 0 0 0.6rem; font-size: 2.2rem; color: #c2f0b1; }
       p { margin: 0 0 2rem; font-size: 1rem; color: #d4f5c8; }
 
@@ -85,10 +79,7 @@ let links = [
         transition: transform 0.2s, box-shadow 0.2s;
         backdrop-filter: blur(6px);
       }
-      .button-list a:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      }
+      .button-list a:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
       .button-list a span { display: flex; align-items: center; gap: 0.75rem; }
       .arrow-icon svg { font-size: 1.2em; }
 
