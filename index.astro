@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon';
 
+// Define the links data
 const links = [
   { href: "https://www.instagram.com/empressmatcha", text: "Instagram",       icon: "mdi:instagram"   },
   { href: "https://empressmatcha.com",               text: "Website",         icon: "mdi:web"         },
@@ -19,6 +20,22 @@ const links = [
     <link rel="icon" href="/assets/logo.webp" type="image/webp" />
 
     <style>
+      /* ── CSS Variables ────────────────────────────────────────────────────────── */
+      :root {
+        --color-dark-green: #0b1f0a;
+        --color-medium-green: #163a1e;
+        --color-light-green: #25512d;
+        --color-border-green: #1a3d24;
+        --color-text-primary: #e5f7e0;
+        --color-text-secondary: #d4f5c8;
+        --color-highlight-green: #c2f0b1;
+        --color-button-bg: rgba(50, 90, 60, 0.3);
+        --color-button-hover-bg: rgba(50, 90, 60, 0.5);
+        --color-shadow-green: rgba(30, 70, 40, 0.7);
+        --card-background: rgba(30, 60, 40, 0.4);
+      }
+
+      /* ── Global Resets ────────────────────────────────────────────────────────── */
       html, body {
         margin: 0;
         padding: 0;
@@ -34,7 +51,7 @@ const links = [
       #preloader {
         position: fixed;
         inset: 0;
-        background: linear-gradient(135deg, #0b1f0a, #163a1e, #25512d, #0b1f0a);
+        background: linear-gradient(135deg, var(--color-dark-green), var(--color-medium-green), var(--color-light-green), var(--color-dark-green));
         background-size: 300% 300%;
         animation: gradientBG 12s ease infinite;
         display: flex;
@@ -55,9 +72,9 @@ const links = [
 
       /* ── GLOBAL BACKGROUND & LAYOUT ────────────────────────────────────────── */
       body {
-        background: radial-gradient(circle at top, #0b1f0a, #25512d);
+        background: radial-gradient(circle at top, var(--color-dark-green), var(--color-light-green));
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-        color: #e5f7e0;
+        color: var(--color-text-primary);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -67,11 +84,10 @@ const links = [
       .card {
         width: 100%;
         max-width: 400px;
-        background: rgba(30, 60, 40, 0.4);
-        border: 1px solid #1a3d24;
+        background: var(--card-background);
+        border: 1px solid var(--color-border-green);
         border-radius: 20px;
-        /* Added extra horizontal and vertical padding */
-        padding: 2.5;
+        padding: 2.5rem; /* Corrected: changed 2.5 to 2.5rem */
         text-align: center;
         box-shadow: 0 16px 48px rgba(0,0,0,0.4);
         animation: fadeIn 0.8s cubic-bezier(0.25,0.1,0.25,1) forwards;
@@ -91,11 +107,11 @@ const links = [
         margin: 0.4rem 0 0.8rem;
         font-size: 2rem;
         font-weight: 700;
-        color: #c2f0b1;
+        color: var(--color-highlight-green);
       }
       p {
         font-size: 1rem;
-        color: #d4f5c8;
+        color: var(--color-text-secondary);
         margin-bottom: 2rem;
       }
 
@@ -109,11 +125,11 @@ const links = [
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: rgba(50, 90, 60, 0.3);
-        border: 1px solid #1a3d24;
+        background: var(--color-button-bg);
+        border: 1px solid var(--color-border-green);
         padding: 1rem 1.2rem;
         border-radius: 12px;
-        color: #e5f7e0;
+        color: var(--color-text-primary);
         text-decoration: none;
         font-size: 1rem;
         transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
@@ -121,6 +137,7 @@ const links = [
         transform: translateY(10px);
         animation: popIn 0.6s ease-out forwards;
       }
+      /* Animation delays for individual buttons - kept here as they are specific to the index page structure */
       .button-list a:nth-child(1) { animation-delay: 0.2s; }
       .button-list a:nth-child(2) { animation-delay: 0.4s; }
       .button-list a:nth-child(3) { animation-delay: 0.6s; }
@@ -129,9 +146,9 @@ const links = [
         to { opacity: 1; transform: translateY(0); }
       }
       .button-list a:hover {
-        background: rgba(50, 90, 60, 0.5);
+        background: var(--color-button-hover-bg);
         transform: translateY(-3px);
-        box-shadow: 0 0 16px rgba(30, 70, 40, 0.7);
+        box-shadow: 0 0 16px var(--color-shadow-green);
       }
       .button-list a span {
         display: flex;
@@ -149,29 +166,37 @@ const links = [
       .footer {
         margin-top: 2rem;
         font-size: 0.85rem;
-        color: #d4f5c8;
+        color: var(--color-text-secondary);
       }
 
+      /* ── Responsive Adjustments ───────────────────────────────────────────── */
       @media (max-width: 480px) {
         h1    { font-size: 1.8rem; }
         p     { font-size: 0.95rem; }
         .logo { width: 90px; height: 90px; }
-        .card { padding: 2.5rem 1.8rem; }
+        .card {
+          padding: 2rem 1.5rem; /* Adjusted padding for smaller screens */
+          margin: 0 1rem;      /* Added horizontal margin to create space from edges */
+          width: auto;         /* Allow width to adjust within margins */
+          max-width: calc(100% - 2rem); /* Ensure it fits with 1rem margin on each side */
+        }
         .button-list a {
           font-size: 0.95rem;
           padding: 0.9rem 1.1rem;
+        }
+        #preloader img {
+          width: 240px; /* Make preloader logo smaller on mobile */
+          height: 240px;
         }
       }
     </style>
   </head>
 
   <body>
-    <!-- Preloader Overlay -->
     <div id="preloader">
       <img src="/assets/emlogo.png" alt="Empress Matcha Logo" />
     </div>
 
-    <!-- Main Card -->
     <div class="card">
       <img src="/assets/logo.webp" alt="Empress Matcha Logo" class="logo" loading="lazy" />
       <h1>Empress Matcha</h1>
@@ -199,14 +224,16 @@ const links = [
       <div class="footer">Empress Matcha © {new Date().getFullYear()}</div>
     </div>
 
-    <!-- Hide preloader after load -->
     <script>
       window.addEventListener("load", () => {
         const pre = document.getElementById("preloader");
-        setTimeout(() => {
-          pre.classList.add("hidden");
-          pre.addEventListener("transitionend", () => pre.remove(), { once: true });
-        }, 3000);
+        if (pre) { // Added a check to ensure preloader exists before manipulating it
+          setTimeout(() => {
+            pre.classList.add("hidden");
+            // Use { once: true } for automatic cleanup after the transition
+            pre.addEventListener("transitionend", () => pre.remove(), { once: true });
+          }, 3000); // 3-second delay for preloader
+        }
       });
     </script>
   </body>
